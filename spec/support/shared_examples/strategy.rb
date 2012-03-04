@@ -26,8 +26,11 @@ shared_examples_for "strategy with association support" do |factory_girl_strateg
   end
 
   before do
+    run_sequence = sequence('run')
+
     FactoryGirl.stubs(:factory_by_name => factory)
-    factory.stubs(:run)
+    factory.expects(:compile).in_sequence(run_sequence)
+    factory.expects(:run).in_sequence(run_sequence)
   end
 
   it "runs the factory with the correct overrides" do
@@ -51,8 +54,11 @@ shared_examples_for "strategy with :strategy => :build" do |factory_girl_strateg
   end
 
   before do
+    run_sequence = sequence('run')
+
     FactoryGirl.stubs(:factory_by_name => factory)
-    factory.stubs(:run)
+    factory.expects(:compile).in_sequence(run_sequence)
+    factory.expects(:run).in_sequence(run_sequence)
   end
 
   it "runs the factory with the correct overrides" do
